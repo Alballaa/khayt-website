@@ -84,7 +84,18 @@
         <span class="lang-icon">🌐</span>
         <span id="langLabel">العربية</span>
       </button>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+        <span class="ham-line ham-top"></span>
+        <span class="ham-line ham-mid"></span>
+        <span class="ham-line ham-bot"></span>
+      </button>
     </div>
+  </div>
+  <!-- Mobile navigation dropdown -->
+  <div class="nav-mobile-menu" id="navMobileMenu" role="navigation" aria-label="Navigation menu">
+    <a href="#features" data-en="Features" data-ar="المميزات">Features</a>
+    <a href="#download" data-en="Download" data-ar="تحميل">Download</a>
+    <a href="https://github.com/sponsors/Alballaa" target="_blank" rel="noopener noreferrer" data-en="Sponsor" data-ar="ادعم المشروع">Sponsor</a>
   </div>
 </nav>
 
@@ -598,6 +609,34 @@
         window.scrollTo({ top, behavior: 'smooth' });
       }
     });
+  });
+
+  // ── Hamburger menu ──
+  const hamburger = document.getElementById('navHamburger');
+  const mobileMenu = document.getElementById('navMobileMenu');
+  const navEl = document.getElementById('nav');
+
+  function closeMobileMenu() {
+    mobileMenu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    navEl.classList.remove('nav-open');
+  }
+
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    navEl.classList.toggle('nav-open', isOpen);
+  });
+
+  // Close on any mobile-menu link click (smooth scroll takes over)
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', closeMobileMenu);
+  });
+
+  // Close when clicking outside the nav
+  document.addEventListener('click', (e) => {
+    if (!navEl.contains(e.target)) closeMobileMenu();
   });
 </script>
 </body>

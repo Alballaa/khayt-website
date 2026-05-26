@@ -666,19 +666,117 @@ a { color: inherit; text-decoration: none; }
 [dir="rtl"] .bilingual-list li::before { margin-left: 0; }
 [dir="rtl"] .screenshots-tabs { direction: rtl; }
 
+/* ── HAMBURGER BUTTON ── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 8px 10px;
+  gap: 0;
+  transition: background 0.2s, border-color 0.2s;
+}
+.nav-hamburger:hover { background: var(--bg2); border-color: rgba(255,255,255,0.15); }
+.ham-line {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  margin: 3px 0;
+  transition: transform 0.25s, opacity 0.2s;
+}
+.nav-open .ham-top { transform: translateY(8px) rotate(45deg); }
+.nav-open .ham-mid { opacity: 0; transform: scaleX(0); }
+.nav-open .ham-bot { transform: translateY(-8px) rotate(-45deg); }
+
+/* ── MOBILE NAV MENU ── */
+.nav-mobile-menu {
+  display: none;
+  position: absolute;
+  top: 64px;
+  left: 0; right: 0;
+  background: rgba(13, 20, 36, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 4px 1.5rem 12px;
+  flex-direction: column;
+  z-index: 98;
+}
+.nav-mobile-menu.open { display: flex; }
+.nav-mobile-menu a {
+  display: block;
+  padding: 14px 4px;
+  font-size: 1rem;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s;
+}
+.nav-mobile-menu a:last-child { border-bottom: none; padding-bottom: 4px; }
+.nav-mobile-menu a:hover { color: var(--text); }
+[dir="rtl"] .nav-mobile-menu a { text-align: right; }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 860px) {
   .bilingual-inner { grid-template-columns: 1fr; gap: 48px; }
   .download-platforms { grid-template-columns: 1fr; }
   .download-header { flex-direction: column; align-items: flex-start; gap: 16px; }
   .screenshots-tabs { gap: 6px; }
-  .ss-tab { font-size: 0.78rem; padding: 6px 12px; }
+  .ss-tab { font-size: 0.82rem; padding: 8px 14px; min-height: 40px; }
 }
+
 @media (max-width: 600px) {
+  /* Nav */
   .nav-links a { display: none; }
-  .hero { padding: 120px 1.25rem 60px; } /* 64px nav + 56px */
+  .nav-hamburger { display: flex; }
+
+  /* Hero */
+  .hero { padding: 110px 1.25rem 56px; }
   .hero-mockup { display: none; }
-  .os-stat { padding: 20px 28px; }
+  .hero-icon { width: 96px; height: 96px; margin-bottom: 20px; }
+
+  /* Sections — reduce vertical padding on mobile */
+  .screenshots-section,
+  .features,
+  .bilingual-section,
+  .opensource-section { padding: 64px 0; }
+  .download-section { padding: 56px 0 72px; }
+
+  /* Tighter section inner padding */
+  .section-inner { padding: 0 1.1rem; }
+  .section-header { margin-bottom: 40px; }
+
+  /* Screenshot tabs — larger tap targets */
+  .ss-tab { font-size: 0.8rem; padding: 8px 12px; min-height: 44px; }
+
+  /* OS stats — stack vertically instead of overflowing */
+  .os-stats { flex-direction: column; border-radius: var(--radius); }
+  .os-stat { padding: 18px 24px; width: 100%; flex: none; }
+  .os-stat-divider { width: 100%; height: 1px; }
+
+  /* Download counter — stack breakdown below total */
+  .dl-counter { flex-direction: column; align-items: flex-start; gap: 12px; padding: 16px 20px; }
+  .dl-counter-breakdown {
+    border-left: none;
+    border-top: 1px solid var(--border);
+    padding-left: 0;
+    padding-top: 12px;
+    width: 100%;
+  }
+  [dir="rtl"] .dl-counter-breakdown {
+    border-right: none;
+    border-top: 1px solid var(--border);
+    padding-right: 0;
+    padding-top: 12px;
+  }
+
+  /* Footer */
   .footer-inner { flex-direction: column; text-align: center; }
   .footer-links { flex-wrap: wrap; justify-content: center; }
+  .footer-brand { justify-content: center; flex: none; }
 }
