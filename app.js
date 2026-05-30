@@ -48,7 +48,7 @@
     'stat.langs':{ en: 'Languages', ar: 'لغات' },
     'stat.subs': { en: 'Subscriptions', ar: 'اشتراكات' },
     'stat.keep': { en: 'Yours to keep', ar: 'ملك لك للأبد' },
-    'dl.eyebrow':{ en: 'Download Khayt v2.1.0', ar: 'حمّل خيط v2.1.0' },
+    'dl.eyebrow':{ en: 'Download Khayt', ar: 'حمّل خيط' },
     'dl.h2':     { en: 'Set up shop in two minutes', ar: 'جهّز مطبعتك في دقيقتين' },
     'dl.lede':   { en: 'Free for everyone. No account. No telemetry. Your data stays on your device.', ar: 'مجاني للجميع. بدون حساب. بدون تتبّع. بياناتك تبقى على جهازك.' },
     'dl.mac':    { en: 'Signed & Notarized — opens cleanly', ar: 'موقّع وموثّق — يفتح بسلاسة' },
@@ -58,7 +58,7 @@
     'dl.exe':    { en: 'Installer (.exe)', ar: 'المثبّت (.exe)' },
     'dl.portable':{ en: 'Portable (.exe)', ar: 'نسخة محمولة (.exe)' },
     'dl.deb':    { en: 'Debian / Ubuntu (.deb)', ar: 'دبيان / أوبنتو (.deb)' },
-    'dl.latest': { en: 'v2.1.0 latest', ar: 'v2.1.0 الأحدث' },
+    'dl.latest': { en: 'latest', ar: 'الأحدث' },
     'dl.srcavail':{ en: 'Source available', ar: 'المصدر متاح' },
     'dl.notel':  { en: 'No telemetry', ar: 'بدون تتبّع' },
     'dl.allrel': { en: 'All releases on GitHub →', ar: 'كل الإصدارات على GitHub ←' },
@@ -222,6 +222,35 @@
     btn.addEventListener('click', function () { applyLang(lang === 'ar' ? 'en' : 'ar'); });
   }
 
+  /* ---------- GitHub latest release (auto-update version + links) ---------- */
+  function setVersion(v) {
+    var tags = document.querySelectorAll('.ver-tag');
+    for (var i = 0; i < tags.length; i++) tags[i].textContent = 'v' + v;
+  }
+  function fmtMB(b) { return Math.round(b / 1048576) + ' MB'; }
+  function fetchLatest() {
+    if (!window.fetch) return;
+    fetch('https://api.github.com/repos/Alballaa/Khayt/releases/latest', { headers: { 'Accept': 'application/vnd.github+json' } })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (rel) {
+        if (!rel || !rel.tag_name) return;
+        var v = String(rel.tag_name).replace(/^v/, '');
+        setVersion(v);
+        var assets = rel.assets || [];
+        function find(re) { for (var i = 0; i < assets.length; i++) if (re.test(assets[i].name)) return assets[i]; return null; }
+        var map = { 'mac-dmg': find(/arm64\.dmg$/i), 'win-exe': find(/setup.*\.exe$/i), 'win-portable': find(/portable.*\.exe$/i), 'linux-appimage': find(/\.AppImage$/i), 'linux-deb': find(/\.deb$/i) };
+        Object.keys(map).forEach(function (key) {
+          var a = map[key]; if (!a) return;
+          var link = document.querySelector('[data-dl="' + key + '"]');
+          if (!link) return;
+          link.setAttribute('href', a.browser_download_url);
+          var sz = link.querySelector('.b');
+          if (sz) { var arch = sz.textContent.split('\u00b7')[0].trim(); sz.textContent = arch + ' \u00b7 ' + fmtMB(a.size); }
+        });
+      })
+      .catch(function () {});
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     var saved = 'en';
     try { saved = localStorage.getItem('khayt-lang') || 'en'; } catch (e) {}
@@ -230,5 +259,6 @@
     nav();
     langToggle();
     applyLang(saved);
+    fetchLatest();
   });
 })();
