@@ -1,654 +1,302 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Content Security Policy -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.github.com; font-src 'self'" />
-
-  <!-- Primary SEO -->
-  <title>Khayt — Free 3D Print Shop Management Software</title>
-  <meta name="description" content="Free desktop app for 3D print shop owners. Kanban production queue, cost calculator, ZATCA invoicing, live printer API (OctoPrint, Bambu, Klipper), filament inventory and analytics. macOS, Windows, Linux." />
-  <meta name="keywords" content="3D printing business software, 3D print shop management, filament inventory tracker, OctoPrint management, ZATCA invoice 3D printing, 3D printing cost calculator, free 3D printing software, print shop kanban, Bambu Lab management, Klipper dashboard, 3D printing invoicing, production queue 3D printing" />
-  <link rel="canonical" href="https://khaytapp.com/" />
-  <meta name="google-site-verification" content="mP1HaJJPMkci85h7wHS9Ldzwfir3RJ6vKmq1QUos7vo" />
-  <meta name="msvalidate.01" content="8CE6576D2FEE62736D760B3D1533606E" />
-
-  <!-- Open Graph (WhatsApp, LinkedIn, Facebook previews) -->
-  <meta property="og:type"        content="website" />
-  <meta property="og:url"         content="https://khaytapp.com/" />
-  <meta property="og:title"       content="Khayt — Free 3D Print Shop Management Software" />
-  <meta property="og:description" content="Kanban queue, cost calculator, ZATCA invoicing, live printer API and filament inventory — all offline, all free. macOS · Windows · Linux." />
-  <meta property="og:image"       content="https://khaytapp.com/screenshots/screenshot-dashboard.png" />
-  <meta property="og:image:width"  content="1280" />
-  <meta property="og:image:height" content="560" />
-  <meta property="og:locale"      content="en_US" />
-  <meta property="og:locale:alternate" content="ar_SA" />
-  <meta property="og:site_name"   content="Khayt" />
-
-  <!-- Twitter / X card -->
-  <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="Khayt — Free 3D Print Shop Management Software" />
-  <meta name="twitter:description" content="Kanban queue, cost calculator, ZATCA invoicing, live printer API and filament inventory — all offline, all free." />
-  <meta name="twitter:image"       content="https://khaytapp.com/screenshots/screenshot-dashboard.png" />
-
-  <!-- Structured data — tells Google this is a software app -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Khayt",
-    "alternateName": "خيط",
-    "url": "https://khaytapp.com",
-    "downloadUrl": "https://github.com/Alballaa/Khayt/releases",
-    "applicationCategory": "BusinessApplication",
-    "operatingSystem": "macOS, Windows, Linux",
-    "softwareVersion": "2.1.2",
-    "description": "Free desktop app for 3D print shop owners. Kanban production queue, smart cost calculator, ZATCA-compliant invoicing, live printer API (OctoPrint, Moonraker, Bambu Lab), filament inventory, client CRM, and analytics.",
-    "screenshot": "https://khaytapp.com/screenshots/screenshot-dashboard.png",
-    "featureList": "Kanban production queue, Cost calculator, ZATCA invoicing, Live printer API, Filament inventory, Client CRM, Analytics, Arabic RTL support",
-    "inLanguage": ["en", "ar", "de", "es", "fr", "zh"],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "author": {
-      "@type": "Person",
-      "name": "Turki AlBallaa",
-      "url": "https://github.com/Alballaa"
-    },
-    "license": "https://github.com/Alballaa/Khayt/blob/main/LICENSE",
-    "releaseNotes": "https://github.com/Alballaa/Khayt/releases"
-  }
-  </script>
-
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" type="image/png" href="icon_preview.png" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khayt — Free 3D Print Shop Management Software</title>
+<meta name="description" content="Free desktop app for 3D print shop owners. Kanban production queue, cost calculator, ZATCA invoicing, live printer API (OctoPrint, Bambu, Klipper), filament inventory and analytics. macOS, Windows, Linux.">
+<meta property="og:title" content="Khayt — Free 3D Print Shop Management Software">
+<meta property="og:description" content="Kanban queue, cost calculator, ZATCA invoicing, live printer API and filament inventory — all offline, all free. macOS · Windows · Linux.">
+<meta property="og:image" content="screenshots/screenshot-dashboard.png">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="khayt-favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="khayt-favicon-16.png">
+<link rel="apple-touch-icon" href="khayt-apple-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Almarai:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav" id="nav">
-  <div class="nav-inner">
-    <div class="nav-brand">
-      <img src="icon_preview.png" alt="Khayt icon" class="nav-icon" />
-      <span class="nav-name" data-en="Khayt" data-ar="خيط">Khayt</span>
-    </div>
-    <div class="nav-links">
-      <a href="#features" data-en="Features" data-ar="المميزات">Features</a>
-      <a href="#download" data-en="Download" data-ar="تحميل">Download</a>
-      <a href="https://github.com/sponsors/Alballaa" target="_blank" rel="noopener noreferrer" data-en="Sponsor" data-ar="ادعم المشروع">Sponsor</a>
-      <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
-        <span class="lang-icon">🌐</span>
-        <span id="langLabel">العربية</span>
-      </button>
-      <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
-        <span class="ham-line ham-top"></span>
-        <span class="ham-line ham-mid"></span>
-        <span class="ham-line ham-bot"></span>
-      </button>
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a href="#top" class="brand"><img src="khayt-icon.png" alt="Khayt icon">Khayt <span class="ar">خيط</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#screens" data-i18n="nav.screens">Screens</a>
+      <a href="#features" data-i18n="nav.features">Features</a>
+      <a href="#languages" data-i18n="nav.languages">Languages</a>
+      <a href="#open-source" data-i18n="nav.oss">Open Source</a>
+      <a href="#download" data-i18n="nav.download">Download</a>
+    </nav>
+    <div class="nav-right">
+      <button class="lang-toggle" id="navLang"><span>🌐</span> العربية</button>
+      <a href="#download" class="btn btn-accent"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg><span class="hide-sm" data-i18n="nav.download">Download</span></a>
+      <button class="nav-burger" id="burger" aria-label="Menu"><span></span></button>
     </div>
   </div>
-  <!-- Mobile navigation dropdown -->
-  <div class="nav-mobile-menu" id="navMobileMenu" role="navigation" aria-label="Navigation menu">
-    <a href="#features" data-en="Features" data-ar="المميزات">Features</a>
-    <a href="#download" data-en="Download" data-ar="تحميل">Download</a>
-    <a href="https://github.com/sponsors/Alballaa" target="_blank" rel="noopener noreferrer" data-en="Sponsor" data-ar="ادعم المشروع">Sponsor</a>
-  </div>
-</nav>
+</header>
 
-<!-- HERO -->
-<section class="hero" id="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-inner">
-    <img src="icon_preview.png" alt="Khayt" class="hero-icon" />
-    <div class="hero-badge">
-      <span class="badge-dot"></span>
-      <span data-en="v2.1.2 — Free to Use · Source Available" data-ar="الإصدار 2.1.2 — مجاني · المصدر متاح">v2.1.2 — Free to Use · Source Available</span>
-    </div>
-    <h1 class="hero-title">
-      <span data-en="Khayt" data-ar="خيط">Khayt</span>
-    </h1>
-    <p class="hero-tagline" data-en="The all-in-one production studio for 3D print shops." data-ar="بيئة الإنتاج الشاملة لمحلات الطباعة ثلاثية الأبعاد.">
-      The all-in-one production studio for 3D print shops.
-    </p>
-    <p class="hero-sub" data-en="Kanban queue, smart costing, ZATCA invoices, live printer API, filament inventory, and deep analytics. Simple or Professional mode — you choose. All offline, all free." data-ar="قائمة إنتاج كانبان، تسعير ذكي، فواتير هيئة الزكاة، واجهة API للطابعات، مخزون الفتيل، وتحليلات متقدمة. وضع بسيط أو احترافي — أنت تختار. كل ذلك دون إنترنت، ومجاناً تماماً.">
-      Kanban queue, smart costing, ZATCA invoices, live printer API, filament inventory, and deep analytics. Simple or Professional mode — you choose. All offline, all free.
-    </p>
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-in">
+    <span class="pill"><span class="tag">v2.1.0</span> <span data-i18n="hero.pill">Free to use · Source available</span></span>
+    <h1 data-i18n="hero.h1">Run your print shop like a studio</h1>
+    <p class="sub" data-i18n="hero.sub">The all-in-one production desk for 3D print shops.</p>
+    <p class="desc" data-i18n="hero.desc">Kanban queue, smart costing, ZATCA invoices, live printer API, filament inventory, and deep analytics. Simple or Professional mode — you choose. All offline, all free.</p>
     <div class="hero-cta">
-      <a href="#download" class="btn btn-primary">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        <span data-en="Download Free" data-ar="تحميل مجاناً">Download Free</span>
-      </a>
-      <a href="https://github.com/Alballaa/Khayt" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-        <span data-en="View on GitHub" data-ar="عرض على GitHub">View on GitHub</span>
-      </a>
+      <a href="#download" class="btn btn-accent btn-lg"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg><span data-i18n="hero.dl">Download Free</span></a>
+      <a href="https://github.com/Alballaa/Khayt" target="_blank" rel="noopener" class="btn btn-ghost btn-lg"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.46-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.85.09-.66.35-1.12.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.86c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.59.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg><span data-i18n="hero.github">View on GitHub</span></a>
     </div>
-    <p class="hero-platform">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-      <span data-en="macOS · Windows · Linux" data-ar="macOS · Windows · Linux">macOS · Windows · Linux</span>
-    </p>
+    <div class="os-line">
+      <span>macOS</span><span class="sep"></span><span>Windows</span><span class="sep"></span><span>Linux</span><span class="sep"></span><span data-i18n="hero.os">No account · No telemetry</span>
+    </div>
   </div>
 
-  <!-- Real app screenshot -->
-  <div class="hero-mockup">
-    <div class="mockup-chrome">
-      <div class="mockup-bar">
-        <span class="dot dot-red"></span>
-        <span class="dot dot-yellow"></span>
-        <span class="dot dot-green"></span>
-        <span class="mockup-title" data-en="Khayt — Production Queue" data-ar="خيط — قائمة الإنتاج">Khayt — Production Queue</span>
+  <div class="wrap hero-shot">
+    <div class="frame">
+      <div class="frame-bar">
+        <div class="frame-dots"><i></i><i></i><i></i></div>
+        <div class="frame-title">Khayt — <b>Production Queue</b></div>
+        <div class="frame-chip"><span class="dot"></span><span data-i18n="hero.live">3 printers live</span></div>
       </div>
-      <img src="screenshots/screenshot-queue.png" alt="Khayt Production Queue screenshot" class="mockup-screenshot" loading="eager" />
-    </div>
-  </div>
-</section>
-
-<!-- SCREENSHOTS -->
-<section class="screenshots-section" id="screenshots">
-  <div class="section-inner">
-    <div class="section-header">
-      <span class="section-tag" data-en="See it in action" data-ar="شاهده في العمل">See it in action</span>
-      <h2 data-en="Every screen, purpose-built" data-ar="كل شاشة مصممة بهدف">Every screen, purpose-built</h2>
-    </div>
-    <div class="screenshots-tabs">
-      <button class="ss-tab active" data-screen="queue" data-en="Production Queue" data-ar="قائمة الإنتاج" onclick="switchScreen(this,'queue')">Production Queue</button>
-      <button class="ss-tab" data-screen="dashboard" data-en="Dashboard" data-ar="لوحة التحكم" onclick="switchScreen(this,'dashboard')">Dashboard</button>
-      <button class="ss-tab" data-screen="calculator" data-en="Calculator" data-ar="الحاسبة" onclick="switchScreen(this,'calculator')">Calculator</button>
-      <button class="ss-tab" data-screen="orders" data-en="Orders Log" data-ar="سجل الطلبات" onclick="switchScreen(this,'orders')">Orders Log</button>
-      <button class="ss-tab" data-screen="inventory" data-en="Inventory" data-ar="المخزون" onclick="switchScreen(this,'inventory')">Inventory</button>
-      <button class="ss-tab" data-screen="analytics" data-en="Analytics" data-ar="التحليلات" onclick="switchScreen(this,'analytics')">Analytics</button>
-      <button class="ss-tab" data-screen="clients" data-en="Clients" data-ar="العملاء" onclick="switchScreen(this,'clients')">Clients</button>
-    </div>
-    <div class="screenshots-viewer">
-      <div class="mockup-chrome">
-        <div class="mockup-bar">
-          <span class="dot dot-red"></span>
-          <span class="dot dot-yellow"></span>
-          <span class="dot dot-green"></span>
-          <span class="mockup-title" id="ssTitle">Khayt — Production Queue</span>
-        </div>
-        <img id="ssImage" src="screenshots/screenshot-queue.png" alt="Khayt — Production Queue screenshot" class="mockup-screenshot" loading="lazy" />
+      <div class="frame-img-wrap">
+        <img class="shot" src="screenshots/screenshot-queue.png" alt="Khayt production queue — Kanban board with live printer status" loading="eager">
       </div>
     </div>
   </div>
 </section>
 
-<!-- FEATURES -->
-<section class="features" id="features">
-  <div class="section-inner">
-    <div class="section-header">
-      <span class="section-tag" data-en="Everything you need" data-ar="كل ما تحتاجه">Everything you need</span>
-      <h2 data-en="Built for print shop owners" data-ar="مصمم لأصحاب محلات الطباعة">Built for print shop owners</h2>
-      <p data-en="One app handles your entire workflow — from first quote to final invoice." data-ar="تطبيق واحد يدير سير عملك كاملاً — من أول عرض سعر حتى الفاتورة النهائية.">One app handles your entire workflow — from first quote to final invoice.</p>
-    </div>
-    <div class="features-grid">
-
-      <div class="feature-card">
-        <div class="feature-icon" style="--c:#5B9CF0">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
-        </div>
-        <h3 data-en="Kanban Production Queue" data-ar="قائمة الإنتاج Kanban">Kanban Production Queue</h3>
-        <p data-en="Drag orders across Pending → Printing → Post-Processing → QC → Done. Per-machine queue views, shift-start checklists, print failure photo capture, on-hold with reason, and part-level colour assignment." data-ar="اسحب الطلبات عبر مراحل الإنتاج. عروض قائمة لكل طابعة، قوائم تفقد بداية الوردية، التقاط صور أعطال الطباعة، وتعيين ألوان لكل قطعة.">Drag orders across Pending → Printing → Post-Processing → QC → Done. Per-machine queue views, shift-start checklists, print failure photo capture, on-hold with reason, and part-level colour assignment.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon" style="--c:#34d399">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        </div>
-        <h3 data-en="Smart Cost Calculator" data-ar="حاسبة التكلفة الذكية">Smart Cost Calculator</h3>
-        <p data-en="Multi-part cart with live breakdown: material, machine time, electricity, labour, overhead, failure rate &amp; margin. FDM (grams) and Resin (mL) support. Multi-material AMS/MMU costing. G-code / 3MF metadata auto-extraction." data-ar="عربة متعددة القطع مع تفصيل مباشر: مادة، وقت الآلة، كهرباء، عمالة، تكاليف عامة ونسبة الفشل. يدعم FDM والراتنج. دعم تكلفة متعدد المواد AMS/MMU. استخراج تلقائي من ملفات G-code و3MF.">Multi-part cart with live breakdown: material, machine time, electricity, labour, overhead, failure rate &amp; margin. FDM (grams) and Resin (mL) support. Multi-material AMS/MMU costing. G-code / 3MF metadata auto-extraction.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon" style="--c:#f59e0b">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-        </div>
-        <h3 data-en="ZATCA-Compliant Invoicing" data-ar="فواتير متوافقة مع هيئة الزكاة">ZATCA-Compliant Invoicing</h3>
-        <p data-en="Phase 1 e-invoices with TLV QR codes, proforma invoices, milestone-based partial billing, quote approval pages, and revision history. GAZT VAT return export, gift cards &amp; store credit. PDF export, WhatsApp &amp; email delivery." data-ar="فواتير إلكترونية المرحلة الأولى مع رموز QR، فواتير مبدئية، دفعات جزئية بالمراحل وتاريخ المراجعات. تصدير إقرار ضريبة القيمة المضافة لهيئة الزكاة، بطاقات الهدايا ورصيد المتجر. تصدير PDF وتسليم عبر واتساب والبريد الإلكتروني.">Phase 1 e-invoices with TLV QR codes, proforma invoices, milestone-based partial billing, quote approval pages, and revision history. GAZT VAT return export, gift cards &amp; store credit. PDF export, WhatsApp &amp; email delivery.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon" style="--c:#06b6d4">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg>
-        </div>
-        <h3 data-en="Live Printer API" data-ar="واجهة الطابعة المباشرة">Live Printer API</h3>
-        <p data-en="Connect OctoPrint, Moonraker (Klipper), Bambu Lab, PrusaLink, Duet, and Repetier. See real-time temperature and print progress directly from the queue." data-ar="اتصل بـ OctoPrint وMoonraker وBambu Lab وPrusaLink وDuet وRepetier. شاهد درجة الحرارة وتقدم الطباعة مباشرةً من قائمة الإنتاج.">Connect OctoPrint, Moonraker (Klipper), Bambu Lab, PrusaLink, Duet, and Repetier. See real-time temperature and print progress directly from the queue.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon" style="--c:#a78bfa">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-        </div>
-        <h3 data-en="Inventory Management" data-ar="إدارة المخزون">Inventory Management</h3>
-        <p data-en="Track FDM spools and Resin bottles with auto-deduction on completion. Spool drying log, test prints, smart reorder alerts with draft PO auto-generation, price history, and overcommit warnings." data-ar="تتبع بكرات FDM وعبوات الراتنج مع خصم تلقائي عند الاكتمال. سجل التجفيف وطبعات الاختبار وتنبيهات إعادة الطلب الذكية مع إنشاء أوامر الشراء تلقائياً وتاريخ الأسعار.">Track FDM spools and Resin bottles with auto-deduction on completion. Spool drying log, test prints, smart reorder alerts with draft PO auto-generation, price history, and overcommit warnings.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon" style="--c:#f472b6">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        </div>
-        <h3 data-en="Analytics &amp; Break-Even" data-ar="التحليلات ونقطة التعادل">Analytics &amp; Break-Even</h3>
-        <p data-en="Revenue, orders, hours, machine P&amp;L, operator performance, retention rates, production heatmap, cost trends, referral analytics, and end-of-day PDF reports. Break-even dashboard card. NPS survey generator. Simple and Professional reporting modes." data-ar="الإيرادات والطلبات والساعات وربحية الآلات وأداء المشغلين، تحليلات الإحالة وتقارير PDF لنهاية اليوم. بطاقة نقطة التعادل ومنشئ استطلاع NPS. أوضاع التقارير البسيطة والمتقدمة.">Revenue, orders, hours, machine P&amp;L, operator performance, retention rates, production heatmap, cost trends, referral analytics, and end-of-day PDF reports. Break-even dashboard card. NPS survey generator. Simple and Professional reporting modes.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon" style="--c:#38bdf8">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <h3 data-en="Client CRM &amp; Loyalty" data-ar="إدارة العملاء والولاء">Client CRM &amp; Loyalty</h3>
-        <p data-en="Client profiles with credit limits, multi-currency support, bilingual VAT details, loyalty tiers with automatic discounts, customer portal QR order tracking, waiting list funnel, intake forms, and aged receivables report." data-ar="ملفات تعريف العملاء مع حدود الائتمان، دعم متعدد العملات، معلومات ضريبة القيمة المضافة، أنظمة النقاط والخصومات التلقائية، تتبع QR لبوابة العملاء، قائمة انتظار الطلبات، وتقرير الذمم المدينة المتقادمة.">Client profiles with credit limits, multi-currency support, bilingual VAT details, loyalty tiers with automatic discounts, customer portal QR order tracking, waiting list funnel, intake forms, and aged receivables report.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon" style="--c:#4ade80">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M6 8h.01M9 8h6"/></svg>
-        </div>
-        <h3 data-en="Expenses &amp; Accounting" data-ar="المصروفات والمحاسبة">Expenses &amp; Accounting</h3>
-        <p data-en="Recurring expenses (monthly/quarterly/annually), budget tracking, receipt attachments, purchase orders with partial receiving, and double-entry accounting CSV export." data-ar="مصروفات متكررة (شهرية/ربع سنوية/سنوية)، تتبع الميزانية، فواتير الموردين مع الاستلام الجزئي، وتصدير CSV محاسبي بالقيد المزدوج.">Recurring expenses (monthly/quarterly/annually), budget tracking, receipt attachments, purchase orders with partial receiving, and double-entry accounting CSV export.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon" style="--c:#fb923c">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-        </div>
-        <h3 data-en="Integrations &amp; Access Control" data-ar="التكاملات والتحكم في الوصول">Integrations &amp; Access Control</h3>
-        <p data-en="Salla/Zid webhooks, Telegram notifications, iCal calendar feed, and public intake form. Embedded LAN REST API — view queue from any device on your network. Built-in auto-updater. Operator PIN lock with Admin / Technician / Sales roles." data-ar="ويب هوك Salla/Zid، إشعارات Telegram، تغذية تقويم iCal، ونموذج استقبال عام. خادم REST API محلي — راقب الطوابير من أي جهاز. محدّث تلقائي مدمج. قفل PIN للمشغلين مع أدوار الإدارة والتقنية والمبيعات.">Salla/Zid webhooks, Telegram notifications, iCal calendar feed, and public intake form. Embedded LAN REST API — view queue from any device on your network. Built-in auto-updater. Operator PIN lock with Admin / Technician / Sales roles.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- BILINGUAL HIGHLIGHT -->
-<section class="bilingual-section" id="bilingual">
-  <div class="section-inner bilingual-inner">
-    <div class="bilingual-text">
-      <span class="section-tag" data-en="6 languages" data-ar="6 لغات">6 languages</span>
-      <h2 data-en="Built for global makers" data-ar="مبني لصانعي العالم">Built for global makers</h2>
-      <p data-en="Full Arabic RTL layout is a core design decision — not an afterthought. Khayt also ships in German, Spanish, French, and Chinese. Switch languages instantly from anywhere in the app." data-ar="تخطيط RTL العربي الكامل قرار تصميمي أساسي وليس إضافة لاحقة. كما يتوفر خيط بالألمانية والإسبانية والفرنسية والصينية. غيّر اللغة فوراً من أي مكان في التطبيق.">Full Arabic RTL layout is a core design decision — not an afterthought. Khayt also ships in German, Spanish, French, and Chinese. Switch languages instantly from anywhere in the app.</p>
-      <ul class="bilingual-list">
-        <li data-en="6 UI languages: Arabic, English, German, Spanish, French, Chinese" data-ar="6 لغات: العربية والإنجليزية والألمانية والإسبانية والفرنسية والصينية">6 UI languages: Arabic, English, German, Spanish, French, Chinese</li>
-        <li data-en="Arabic RTL layout throughout the entire app" data-ar="تخطيط عربي RTL في كل أنحاء التطبيق">Arabic RTL layout throughout the entire app</li>
-        <li data-en="ZATCA invoices in bilingual Arabic &amp; English" data-ar="فواتير هيئة الزكاة بالعربية والإنجليزية">ZATCA invoices in bilingual Arabic &amp; English</li>
-        <li data-en="Instant language switch, no restart needed" data-ar="تبديل فوري للغة دون إعادة تشغيل">Instant language switch, no restart needed</li>
-      </ul>
-    </div>
-    <div class="bilingual-demo">
-      <div class="lang-demo-card en-card" dir="ltr">
-        <div class="demo-card-label">English</div>
-        <div class="demo-row"><div class="demo-label">Material</div><div class="demo-value">PLA Black</div></div>
-        <div class="demo-row"><div class="demo-label">Weight</div><div class="demo-value">148 g</div></div>
-        <div class="demo-row"><div class="demo-label">Print time</div><div class="demo-value">4h 22m</div></div>
-        <div class="demo-row highlight-row"><div class="demo-label">Total cost</div><div class="demo-value accent">SAR 38.50</div></div>
-      </div>
-      <div class="lang-demo-card ar-card" dir="rtl">
-        <div class="demo-card-label">عربي</div>
-        <div class="demo-row"><div class="demo-label">المادة</div><div class="demo-value">PLA أسود</div></div>
-        <div class="demo-row"><div class="demo-label">الوزن</div><div class="demo-value">١٤٨ غ</div></div>
-        <div class="demo-row"><div class="demo-label">وقت الطباعة</div><div class="demo-value">٤س ٢٢د</div></div>
-        <div class="demo-row highlight-row"><div class="demo-label">التكلفة الإجمالية</div><div class="demo-value accent">٣٨٫٥٠ ر.س</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SOURCE AVAILABLE -->
-<section class="opensource-section" id="opensource">
-  <div class="section-inner opensource-inner">
-    <div class="os-icon-wrap">
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-    </div>
-    <h2 data-en="Free to Use. Source Available." data-ar="مجاني للاستخدام. المصدر متاح.">Free to Use. Source Available.</h2>
-    <p data-en="Khayt is free to use and will remain free. The source code is on GitHub — read it, fork it, modify it for your own use. Licensed under MIT + Commons Clause (no reselling). If it helps your business, consider sponsoring." data-ar="خيط مجاني للاستخدام وسيبقى مجانياً. الكود المصدري متاح على GitHub — اقرأه وانسخه وعدّله لاستخدامك الشخصي. مرخص بـ MIT + Commons Clause (لا يُباع). إذا أفاد عملك فكّر في دعم المشروع.">Khayt is free to use and will remain free. The source code is on GitHub — read it, fork it, modify it for your own use. Licensed under MIT + Commons Clause (no reselling). If it helps your business, consider sponsoring.</p>
-    <div class="os-actions">
-      <a href="https://github.com/Alballaa/Khayt" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-        <span data-en="Star on GitHub" data-ar="نجّم على GitHub">Star on GitHub</span>
-      </a>
-      <a href="https://github.com/sponsors/Alballaa" target="_blank" rel="noopener noreferrer" class="btn btn-sponsor">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-.525.444-2.938 2.054-4.234 2.054A.63.63 0 0 1 7 23c0-.388.232-.786.664-1.183L12 18.13l4.336 3.687c.432.397.664.795.664 1.183a.63.63 0 0 1-.766.647C14.938 23.647 12.525 22.037 12 21.593zm0-1.787-4.742-4.036C4.96 13.915 3 11.871 3 9.5 3 6.462 5.462 4 8.5 4c1.656 0 3.148.745 4.16 1.926A5.49 5.49 0 0 1 15.5 4C18.538 4 21 6.462 21 9.5c0 2.371-1.96 4.415-4.258 6.27L12 19.806z"/></svg>
-        <span data-en="Sponsor on GitHub" data-ar="ادعم على GitHub">Sponsor on GitHub</span>
-      </a>
-    </div>
-    <div class="os-stats">
-      <div class="os-stat">
-        <span class="os-stat-num">100%</span>
-        <span class="os-stat-label" data-en="Free to Use" data-ar="مجاني للاستخدام">Free to Use</span>
-      </div>
-      <div class="os-stat-divider"></div>
-      <div class="os-stat">
-        <span class="os-stat-num">6</span>
-        <span class="os-stat-label" data-en="Languages" data-ar="لغات">Languages</span>
-      </div>
-      <div class="os-stat-divider"></div>
-      <div class="os-stat">
-        <span class="os-stat-num">0</span>
-        <span class="os-stat-label" data-en="Subscriptions" data-ar="اشتراكات">Subscriptions</span>
-      </div>
-      <div class="os-stat-divider"></div>
-      <div class="os-stat">
-        <span class="os-stat-num">∞</span>
-        <span class="os-stat-label" data-en="Yours to keep" data-ar="ملكك للأبد">Yours to keep</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- DOWNLOAD -->
-<section class="download-section" id="download">
-  <div class="section-inner">
-    <div class="download-header">
-      <img src="icon_preview.png" alt="Khayt" class="download-icon" />
+<!-- ============ SCREEN GALLERY ============ -->
+<section class="section" id="screens">
+  <div class="wrap">
+    <div class="gallery-head">
       <div>
-        <h2 data-en="Download Khayt" data-ar="تحميل خيط">Download Khayt</h2>
-        <p data-en="Free for everyone. No account. No telemetry. Your data stays on your device." data-ar="مجاني للجميع. لا حساب. لا بيانات مُرسَلة. بياناتك تبقى على جهازك.">Free for everyone. No account. No telemetry. Your data stays on your device.</p>
-        <div class="download-meta">
-          <span class="meta-pill">v2.1.2</span>
-          <span class="meta-pill" data-en="Source Available" data-ar="المصدر متاح">Source Available</span>
-          <span class="meta-pill" data-en="No telemetry" data-ar="لا بيانات مُرسَلة">No telemetry</span>
+        <span class="eyebrow" data-i18n="gal.eyebrow">See it in action</span>
+        <h2 class="h2" style="margin-top:16px" data-i18n="gal.h2">Every screen, purpose-built</h2>
+      </div>
+      <p class="lede" data-i18n="gal.lede">One app runs the whole shop — quoting, production, invoicing, inventory and the numbers behind it all. These are real screens, not mockups.</p>
+    </div>
+
+    <div class="tabs" id="tabs" role="tablist">
+      <button class="tab" role="tab" aria-selected="true" data-key="queue" data-i18n="tab.queue">Production Queue</button>
+      <button class="tab" role="tab" aria-selected="false" data-key="dashboard" data-i18n="tab.dashboard">Dashboard</button>
+      <button class="tab" role="tab" aria-selected="false" data-key="calculator" data-i18n="tab.calculator">Calculator</button>
+      <button class="tab" role="tab" aria-selected="false" data-key="orders" data-i18n="tab.orders">Orders Log</button>
+      <button class="tab" role="tab" aria-selected="false" data-key="inventory" data-i18n="tab.inventory">Inventory</button>
+      <button class="tab" role="tab" aria-selected="false" data-key="analytics" data-i18n="tab.analytics">Analytics</button>
+      <button class="tab" role="tab" aria-selected="false" data-key="clients" data-i18n="tab.clients">Clients</button>
+    </div>
+
+    <div class="gallery-shot">
+      <div class="frame">
+        <div class="frame-bar">
+          <div class="frame-dots"><i></i><i></i><i></i></div>
+          <div class="frame-title" id="galTitle">Khayt — <b>Production Queue</b></div>
+        </div>
+        <div class="frame-img-wrap">
+          <img class="shot" id="galImg" src="screenshots/screenshot-queue.png" alt="Khayt production queue screenshot" loading="lazy">
         </div>
       </div>
     </div>
 
-    <!-- Download counter -->
-    <div class="dl-counter" id="dlCounter" style="display:none">
-      <div class="dl-counter-total">
-        <span class="dl-counter-num" id="dlTotal">0</span>
-        <span class="dl-counter-label" data-en="total downloads" data-ar="إجمالي التنزيلات">total downloads</span>
+    <div class="gallery-cap">
+      <span class="bar"></span>
+      <div>
+        <h3 id="capTitle">Kanban production queue</h3>
+        <p id="capText">Drag orders across Pending → Printing → Post-Processing → QC → Done. Per-machine queue views, shift-start checklists, print-failure photo capture, on-hold with reason, and part-level colour assignment.</p>
       </div>
-      <div class="dl-counter-breakdown" id="dlBreakdown"></div>
     </div>
-    <div class="download-platforms">
-
-      <!-- macOS -->
-      <div class="platform-card">
-        <div class="platform-header">
-          <svg class="platform-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          <span class="platform-name">macOS</span>
-        </div>
-        <div class="platform-downloads">
-          <a href="https://github.com/Alballaa/Khayt/releases/download/v2.1.2/Khayt-2.1.2-arm64.dmg" class="dl-btn dl-btn-primary">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            <div>
-              <span data-en="Apple Silicon (M1 and later)" data-ar="Apple Silicon (M1 فما فوق)">Apple Silicon (M1 and later)</span>
-              <small>arm64 · 128 MB</small>
-            </div>
-          </a>
-        </div>
-        <p class="platform-note" data-en="✓ Signed &amp; Notarized — opens without warnings" data-ar="✓ موقّع ومعتمد من Apple — يفتح بدون تحذيرات">✓ Signed &amp; Notarized — opens without warnings</p>
-      </div>
-
-      <!-- Windows -->
-      <div class="platform-card">
-        <div class="platform-header">
-          <svg class="platform-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
-          <span class="platform-name">Windows</span>
-        </div>
-        <div class="platform-downloads">
-          <a href="https://github.com/Alballaa/Khayt/releases/download/v2.1.2/Khayt-Setup-2.1.2.exe" class="dl-btn dl-btn-primary">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            <div>
-              <span data-en="Installer (.exe)" data-ar="مثبت (.exe)">Installer (.exe)</span>
-              <small>x64 · 108 MB</small>
-            </div>
-          </a>
-          <a href="https://github.com/Alballaa/Khayt/releases/download/v2.1.2/Khayt-Setup-2.1.2.exe" class="dl-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            <div>
-              <span data-en="Portable (.exe)" data-ar="محمول (.exe)">Portable (.exe)</span>
-              <small>x64 · 108 MB</small>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <!-- Linux -->
-      <div class="platform-card">
-        <div class="platform-header">
-          <svg class="platform-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12.504 0c-.155 0-.315.008-.48.021C7.309.149 4.893 1.989 1.86 7.336c-2.962 5.223-1.459 11.473.847 14.498 1.175 1.533 2.633 1.988 3.794 1.988.585 0 1.118-.132 1.591-.42 1.261-.79 2.232-.748 3.164-.748.87 0 1.725.006 2.846.748.514.33 1.037.5 1.607.5 1.108 0 2.529-.528 3.652-2.034 1.339-1.768 2.046-4.22 2.093-4.39.023-.079-1.086-.418-1.079-.521.128-2.18-.722-3.857-1.555-5.019-.859-1.193-1.849-1.876-2.658-2.277-.812-.404-1.467-.55-1.947-.55-.337 0-.568.069-.59.083-.025.014-.033.033-.033.087 0 .05.025.11.054.152l.076.085c.099.11.157.24.157.42 0 .37-.289.706-.766.706-.338 0-.591-.117-.72-.327-.099-.166-.14-.352-.14-.56 0-.526.23-.99.575-1.303.35-.316.835-.496 1.4-.496.85 0 1.805.316 2.795.938 1.23.772 2.326 1.97 3.14 3.486.825 1.54 1.28 3.328 1.209 5.14-.002.042-.004.072-.004.098 0 .18.05.312.131.384.086.075.2.11.326.11.234 0 .44-.122.508-.312.11-.304.232-.756.232-1.286 0-2.025-.787-4.59-2.265-6.542-1.49-1.965-3.546-3.26-5.87-3.26-.124 0-.248.004-.37.01z"/></svg>
-          <span class="platform-name">Linux</span>
-        </div>
-        <div class="platform-downloads">
-          <a href="https://github.com/Alballaa/Khayt/releases/download/v2.1.2/Khayt-2.1.2.AppImage" class="dl-btn dl-btn-primary">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            <div>
-              <span>AppImage</span>
-              <small>x64 · 130 MB</small>
-            </div>
-          </a>
-          <a href="https://github.com/Alballaa/Khayt/releases/download/v2.1.2/khayt_2.1.2_amd64.deb" class="dl-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            <div>
-              <span>Debian / Ubuntu (.deb)</span>
-              <small>amd64 · 101 MB</small>
-            </div>
-          </a>
-        </div>
-      </div>
-
-    </div>
-    <p class="download-releases-link">
-      <a href="https://github.com/Alballaa/Khayt/releases" target="_blank" rel="noopener noreferrer" data-en="All releases on GitHub →" data-ar="جميع الإصدارات على GitHub →">All releases on GitHub →</a>
-    </p>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ============ FEATURES ============ -->
+<section class="section" id="features" style="background:var(--paper-2); border-block:1px solid var(--line);">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="feat.eyebrow">Everything you need</span>
+    <h2 class="h2" style="margin-top:16px" data-i18n="feat.h2">Built for print shop owners</h2>
+    <p class="lede" style="margin-top:16px" data-i18n="feat.lede">One app handles your entire workflow — from first quote to final invoice, entirely offline.</p>
+    <div class="feat-grid" id="featGrid"></div>
+  </div>
+</section>
+
+<!-- ============ BILINGUAL ============ -->
+<section class="section" id="languages">
+  <div class="wrap">
+    <div class="biling">
+      <div class="biling-in">
+        <div>
+          <span class="eyebrow" data-i18n="lang.eyebrow">7 languages</span>
+          <h2 data-i18n="lang.h2">Built for global makers</h2>
+          <p class="lede" data-i18n="lang.lede">Full Arabic RTL layout is a core design decision — not an afterthought. Khayt also ships in German, Spanish, French, Chinese and Japanese, with instant switching from anywhere in the app.</p>
+          <ul class="lang-feats">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="lang.li1">Arabic RTL layout throughout the entire app</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="lang.li2">ZATCA invoices in bilingual Arabic &amp; English</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="lang.li3">Instant language switch, no restart needed</span></li>
+          </ul>
+          <div class="lang-chips">
+            <span class="lang-chip on">العربية</span>
+            <span class="lang-chip on">English</span>
+            <span class="lang-chip">Deutsch</span>
+            <span class="lang-chip">Español</span>
+            <span class="lang-chip">Français</span>
+            <span class="lang-chip">中文</span>
+            <span class="lang-chip">日本語</span>
+          </div>
+        </div>
+
+        <div class="flip-wrap">
+          <div class="flip-head">
+            <span class="lab" data-i18n="flip.lab">Live invoice preview</span>
+            <div class="flip-switch" id="flipSwitch">
+              <button class="on" data-side="front">EN</button>
+              <button data-side="back">ع</button>
+            </div>
+          </div>
+          <div class="flip-card" id="flipCard">
+            <div class="flip-face front">
+              <div class="receipt-top">
+                <div class="r-brand"><img src="khayt-icon.png" alt="">Khayt</div>
+                <span class="r-tag">TAX INVOICE · #INV-1042</span>
+              </div>
+              <div class="r-row"><span class="k">Material</span><span class="v"><span class="sw"></span>PLA Black</span></div>
+              <div class="r-row"><span class="k">Weight</span><span class="v">148 g</span></div>
+              <div class="r-row"><span class="k">Print time</span><span class="v">4h 22m</span></div>
+              <div class="r-row"><span class="k">VAT (15%)</span><span class="v">SAR 5.02</span></div>
+              <div class="r-total"><span class="k">Total cost</span><span class="v">SAR 38.50</span></div>
+              <div class="r-qr"><span class="qr"></span><span class="qt">ZATCA Phase 1<br>TLV QR · verified</span></div>
+            </div>
+            <div class="flip-face back" dir="rtl">
+              <div class="receipt-top">
+                <div class="r-brand"><img src="khayt-icon.png" alt=""><span class="ar">خيط</span></div>
+                <span class="r-tag">فاتورة ضريبية · ١٠٤٢#</span>
+              </div>
+              <div class="r-row"><span class="k">المادة</span><span class="v"><span class="sw"></span>PLA أسود</span></div>
+              <div class="r-row"><span class="k">الوزن</span><span class="v">١٤٨ غ</span></div>
+              <div class="r-row"><span class="k">وقت الطباعة</span><span class="v">٤س ٢٢د</span></div>
+              <div class="r-row"><span class="k">ضريبة القيمة المضافة (١٥٪)</span><span class="v">٥٫٠٢ ر.س</span></div>
+              <div class="r-total"><span class="k">التكلفة الإجمالية</span><span class="v">٣٨٫٥٠ ر.س</span></div>
+              <div class="r-qr"><span class="qr"></span><span class="qt">هيئة الزكاة · المرحلة الأولى<br>رمز QR موثّق</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPEN SOURCE ============ -->
+<section class="section" id="open-source">
+  <div class="wrap">
+    <div class="oss-grid">
+      <div>
+        <span class="eyebrow" data-i18n="oss.eyebrow">Source available</span>
+        <h2 class="h2" style="margin-top:16px" data-i18n-html="oss.h2">Free to use.<br>Yours to inspect.</h2>
+        <p class="lede" style="margin-top:18px" data-i18n="oss.lede">Khayt is free to use and will remain free. The source is on GitHub — read it, fork it, modify it for your own shop. Licensed under MIT + Commons Clause (no reselling). If it helps your business, consider sponsoring.</p>
+        <div class="hero-cta" style="justify-content:flex-start;margin-top:26px">
+          <a href="https://github.com/Alballaa/Khayt" target="_blank" rel="noopener" class="btn btn-primary btn-lg"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.46-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.85.09-.66.35-1.12.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.86c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.59.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg><span data-i18n="oss.star">Star on GitHub</span></a>
+          <a href="https://github.com/sponsors/Alballaa" target="_blank" rel="noopener" class="btn btn-ghost btn-lg"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg><span data-i18n="oss.sponsor">Sponsor</span></a>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat-card"><div class="big">100%</div><div class="cap" data-i18n="stat.free">Free to use</div></div>
+        <div class="stat-card"><div class="big">7</div><div class="cap" data-i18n="stat.langs">Languages</div></div>
+        <div class="stat-card"><div class="big">0</div><div class="cap" data-i18n="stat.subs">Subscriptions</div></div>
+        <div class="stat-card"><div class="big">∞</div><div class="cap" data-i18n="stat.keep">Yours to keep</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DOWNLOAD ============ -->
+<section class="section dl" id="download">
+  <div class="wrap" style="text-align:center">
+    <span class="eyebrow" style="justify-content:center" data-i18n="dl.eyebrow">Download Khayt v2.1.0</span>
+    <h2 class="h2" style="margin-top:16px" data-i18n="dl.h2">Set up shop in two minutes</h2>
+    <p class="lede" style="margin:16px auto 0;text-align:center" data-i18n="dl.lede">Free for everyone. No account. No telemetry. Your data stays on your device.</p>
+
+    <div class="dl-grid" style="text-align:start">
+      <div class="dl-card">
+        <div class="dl-os">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg></span>
+          <div><h3>macOS</h3><span class="note">Apple Silicon (M1+) · arm64</span></div>
+        </div>
+        <div class="dl-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span data-i18n="dl.mac">Signed &amp; Notarized — opens cleanly</span></div>
+        <div class="dl-btns">
+          <a class="dl-link" href="https://github.com/Alballaa/Khayt/releases/download/v2.1.0/Khayt-2.1.0-arm64.dmg"><div><div class="a" data-i18n="dl.dmg">Download .dmg</div><div class="b">arm64 · 128 MB</div></div><span class="arr">→</span></a>
+        </div>
+      </div>
+      <div class="dl-card">
+        <div class="dl-os">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg></span>
+          <div><h3>Windows</h3><span class="note">x64 · Windows 10/11</span></div>
+        </div>
+        <div class="dl-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span data-i18n="dl.win">Built-in auto-updater</span></div>
+        <div class="dl-btns">
+          <a class="dl-link" href="https://github.com/Alballaa/Khayt/releases/download/v2.1.0/Khayt-Setup-2.1.0.exe"><div><div class="a" data-i18n="dl.exe">Installer (.exe)</div><div class="b">x64 · 108 MB</div></div><span class="arr">→</span></a>
+          <a class="dl-link" href="https://github.com/Alballaa/Khayt/releases" target="_blank" rel="noopener"><div><div class="a" data-i18n="dl.portable">Portable (.exe)</div><div class="b">x64 · 108 MB</div></div><span class="arr">→</span></a>
+        </div>
+      </div>
+      <div class="dl-card">
+        <div class="dl-os">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.504 0c-.155 0-.315.008-.48.021C7.31.15 4.892 1.992 1.86 7.338-.484 11.46-.165 15.5 1.36 18.5c1.05 2.05 2.7 3.4 4.3 3.4.6 0 1.1-.15 1.55-.45 1.05-.7 2.05-.7 2.85-.7.85 0 1.8 0 2.85.7.45.3.95.45 1.55.45 1.6 0 3.25-1.35 4.3-3.4 1.5-2.95 1.85-7 -.5-11.16C15.9 1.99 13.5.15 12.99.02 12.83.01 12.67 0 12.5 0zM10 5.5c.55 0 1 .67 1 1.5s-.45 1.5-1 1.5-1-.67-1-1.5.45-1.5 1-1.5zm4 0c.55 0 1 .67 1 1.5s-.45 1.5-1 1.5-1-.67-1-1.5.45-1.5 1-1.5z"/></svg></span>
+          <div><h3>Linux</h3><span class="note">x64 · AppImage / deb</span></div>
+        </div>
+        <div class="dl-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span data-i18n="dl.linux">Runs anywhere, no install</span></div>
+        <div class="dl-btns">
+          <a class="dl-link" href="https://github.com/Alballaa/Khayt/releases/download/v2.1.0/Khayt-2.1.0.AppImage"><div><div class="a">AppImage</div><div class="b">x64 · 130 MB</div></div><span class="arr">→</span></a>
+          <a class="dl-link" href="https://github.com/Alballaa/Khayt/releases/download/v2.1.0/khayt_2.1.0_amd64.deb"><div><div class="a" data-i18n="dl.deb">Debian / Ubuntu (.deb)</div><div class="b">amd64 · 101 MB</div></div><span class="arr">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="dl-meta">
+      <span class="meta-chip"><span class="dot"></span><span data-i18n="dl.latest">v2.1.0 latest</span></span>
+      <span class="meta-chip" data-i18n="dl.srcavail">Source available</span>
+      <span class="meta-chip" data-i18n="dl.notel">No telemetry</span>
+      <a class="meta-chip" href="https://github.com/Alballaa/Khayt/releases" target="_blank" rel="noopener" style="color:var(--accent-2)" data-i18n="dl.allrel">All releases on GitHub →</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
 <footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <img src="icon_preview.png" alt="Khayt" class="footer-icon" />
-      <div>
-        <div class="footer-name" data-en="Khayt — خيط" data-ar="خيط — Khayt">Khayt — خيط</div>
-        <div class="footer-tagline" data-en="3D Printing Production Manager" data-ar="مدير إنتاج الطباعة ثلاثية الأبعاد">3D Printing Production Manager</div>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="brand"><img src="khayt-icon.png" alt="Khayt icon">Khayt <span class="ar">خيط</span></a>
+        <p data-i18n="foot.desc">The all-in-one production desk for 3D print shops — quoting, queue, invoicing and inventory, entirely offline.</p>
+        <p class="ar-sub">خيط — مدير إنتاج الطباعة ثلاثية الأبعاد</p>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h4 data-i18n="foot.product">Product</h4>
+          <a href="#screens" data-i18n="nav.screens">Screens</a>
+          <a href="#features" data-i18n="nav.features">Features</a>
+          <a href="#languages" data-i18n="nav.languages">Languages</a>
+          <a href="#download" data-i18n="nav.download">Download</a>
+        </div>
+        <div class="foot-col">
+          <h4 data-i18n="foot.project">Project</h4>
+          <a href="https://github.com/Alballaa/Khayt" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/Alballaa/Khayt/releases" target="_blank" rel="noopener" data-i18n="foot.releases">Releases</a>
+          <a href="https://github.com/sponsors/Alballaa" target="_blank" rel="noopener" data-i18n="oss.sponsor">Sponsor</a>
+          <a href="#open-source" data-i18n="foot.license">License</a>
+        </div>
       </div>
     </div>
-    <div class="footer-links">
-      <a href="https://github.com/Alballaa/Khayt" target="_blank" rel="noopener noreferrer" data-en="GitHub" data-ar="GitHub">GitHub</a>
-      <a href="https://github.com/sponsors/Alballaa" target="_blank" rel="noopener noreferrer" data-en="Sponsor" data-ar="ادعم المشروع">Sponsor</a>
-      <a href="#features" data-en="Features" data-ar="المميزات">Features</a>
-      <a href="#download" data-en="Download" data-ar="تحميل">Download</a>
+    <div class="foot-bottom">
+      <span data-i18n="foot.made">Made with ♥ for the 3D printing community · Built with the help of AI</span>
+      <span>MIT + Commons Clause · © 2026 Khayt</span>
     </div>
-    <div class="footer-copy" data-en="Made with ♥ for the 3D printing community · MIT + Commons Clause" data-ar="صُنع بـ ♥ لمجتمع الطباعة ثلاثية الأبعاد · MIT + Commons Clause">Made with ♥ for the 3D printing community · MIT + Commons Clause</div>
   </div>
 </footer>
 
-<script>
-  // Screenshot tab switcher
-  const screenTitles = {
-    queue:      { en: 'Khayt — Production Queue', ar: 'خيط — قائمة الإنتاج' },
-    dashboard:  { en: 'Khayt — Dashboard',        ar: 'خيط — لوحة التحكم' },
-    calculator: { en: 'Khayt — Calculator',       ar: 'خيط — حاسبة التسعير' },
-    orders:     { en: 'Khayt — Orders Log',       ar: 'خيط — سجل الطلبات' },
-    inventory:  { en: 'Khayt — Inventory',        ar: 'خيط — المخزون' },
-    analytics:  { en: 'Khayt — Analytics',        ar: 'خيط — التحليلات' },
-    clients:    { en: 'Khayt — Clients',          ar: 'خيط — العملاء' },
-  };
-
-  function getScreenSrc(key, ar) {
-    return `screenshots/screenshot-${ar ? 'ar-' : ''}${key}.png`;
-  }
-
-  function switchScreen(btn, key) {
-    document.querySelectorAll('.ss-tab').forEach(t => t.classList.remove('active'));
-    btn.classList.add('active');
-    const ssImg = document.getElementById('ssImage');
-    const lang = isArabic ? 'ar' : 'en';
-    // Fade out → swap src + alt → fade in
-    ssImg.style.opacity = '0';
-    setTimeout(() => {
-      ssImg.src = getScreenSrc(key, isArabic);
-      ssImg.alt = `Khayt — ${screenTitles[key][lang]} screenshot`;
-      ssImg.style.opacity = '1';
-    }, 150);
-    document.getElementById('ssTitle').textContent = screenTitles[key][lang];
-  }
-
-  function updateAllScreenshots(ar) {
-    // Hero screenshot
-    const heroImg = document.querySelector('.hero-mockup .mockup-screenshot');
-    if (heroImg) heroImg.src = getScreenSrc('queue', ar);
-
-    // Gallery screenshot
-    const ssImg = document.getElementById('ssImage');
-    const activeTab = document.querySelector('.ss-tab.active');
-    const key = activeTab?.getAttribute('data-screen') || 'queue';
-    if (ssImg) ssImg.src = getScreenSrc(key, ar);
-
-    // Window title bar
-    const titleEl = document.getElementById('ssTitle');
-    if (titleEl) titleEl.textContent = screenTitles[key][ar ? 'ar' : 'en'];
-
-    // Hero window title
-    const heroTitle = document.querySelector('.hero-mockup .mockup-title');
-    if (heroTitle) heroTitle.textContent = screenTitles['queue'][ar ? 'ar' : 'en'];
-  }
-
-  // Language toggle
-  const langToggle = document.getElementById('langToggle');
-  const langLabel = document.getElementById('langLabel');
-  const html = document.documentElement;
-  let isArabic = false;
-
-  function applyLang(ar) {
-    isArabic = ar;
-    html.setAttribute('lang', ar ? 'ar' : 'en');
-    html.setAttribute('dir', ar ? 'rtl' : 'ltr');
-    langLabel.textContent = ar ? 'English' : 'العربية';
-    document.querySelectorAll('[data-en]').forEach(el => {
-      el.textContent = ar ? el.getAttribute('data-ar') : el.getAttribute('data-en');
-    });
-    // Swap all screenshots to match language
-    updateAllScreenshots(ar);
-  }
-
-  langToggle.addEventListener('click', () => applyLang(!isArabic));
-
-  // ── Download counter ──
-  const PLATFORM_MAP = {
-    '.dmg':  { label: 'macOS',   icon: '🍎' },
-    '.exe':  { label: 'Windows', icon: '🪟' },
-    '.AppImage': { label: 'Linux', icon: '🐧' },
-    '.deb':  { label: 'Linux',   icon: '🐧' },
-  };
-
-  function animateCount(el, target) {
-    const duration = 900;
-    const start = performance.now();
-    const from = parseInt(el.textContent) || 0;
-    function step(now) {
-      const p = Math.min((now - start) / duration, 1);
-      const ease = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(from + (target - from) * ease).toLocaleString();
-      if (p < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-
-  async function loadDownloadStats() {
-    const CACHE_KEY = 'khayt_dl_stats';
-    const CACHE_TTL = 60 * 60 * 1000; // 1 hour
-    let data;
-    try {
-      const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
-      if (cached && Date.now() - cached.ts < CACHE_TTL) {
-        data = cached.data;
-      } else {
-        const res = await fetch('https://api.github.com/repos/Alballaa/Khayt/releases');
-        if (!res.ok) return;
-        data = await res.json();
-        localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data }));
-      }
-    } catch(e) { console.warn('Download stats unavailable', e); return; }
-
-    // Tally totals
-    let total = 0;
-    const byPlatform = {};
-    for (const release of data) {
-      for (const asset of release.assets || []) {
-        const ext = Object.keys(PLATFORM_MAP).find(e => asset.name.endsWith(e));
-        const platform = ext ? PLATFORM_MAP[ext].label : 'Other';
-        byPlatform[platform] = (byPlatform[platform] || 0) + asset.download_count;
-        total += asset.download_count;
-      }
-    }
-
-    if (total === 0) return; // hide until there's something to show
-
-    // Render
-    const counterEl = document.getElementById('dlCounter');
-    const totalEl   = document.getElementById('dlTotal');
-    const breakEl   = document.getElementById('dlBreakdown');
-
-    const platforms = [
-      { key: 'macOS',   icon: '🍎' },
-      { key: 'Windows', icon: '🪟' },
-      { key: 'Linux',   icon: '🐧' },
-    ];
-    breakEl.innerHTML = platforms
-      .filter(p => byPlatform[p.key])
-      .map(p => `<span class="dl-platform-stat">${p.icon} ${p.key} <strong>${byPlatform[p.key].toLocaleString()}</strong></span>`)
-      .join('');
-
-    counterEl.style.display = 'flex';
-    animateCount(totalEl, total);
-
-    // Keep translated
-    counterEl.querySelectorAll('[data-en]').forEach(el => {
-      el.textContent = isArabic ? el.getAttribute('data-ar') : el.getAttribute('data-en');
-    });
-  }
-
-  loadDownloadStats();
-
-  // Nav scroll effect
-  window.addEventListener('scroll', () => {
-    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
-  });
-
-  // Smooth scroll for anchor links (offset for fixed nav = 80px)
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        const top = target.getBoundingClientRect().top + window.scrollY - 80;
-        window.scrollTo({ top, behavior: 'smooth' });
-      }
-    });
-  });
-
-  // ── Hamburger menu ──
-  const hamburger = document.getElementById('navHamburger');
-  const mobileMenu = document.getElementById('navMobileMenu');
-  const navEl = document.getElementById('nav');
-
-  function closeMobileMenu() {
-    mobileMenu.classList.remove('open');
-    hamburger.setAttribute('aria-expanded', 'false');
-    navEl.classList.remove('nav-open');
-  }
-
-  hamburger.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isOpen = mobileMenu.classList.toggle('open');
-    hamburger.setAttribute('aria-expanded', String(isOpen));
-    navEl.classList.toggle('nav-open', isOpen);
-  });
-
-  // Close on any mobile-menu link click (smooth scroll takes over)
-  mobileMenu.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', closeMobileMenu);
-  });
-
-  // Close when clicking outside the nav
-  document.addEventListener('click', (e) => {
-    if (!navEl.contains(e.target)) closeMobileMenu();
-  });
-</script>
+<script src="app.js"></script>
 </body>
 </html>
