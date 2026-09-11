@@ -26,6 +26,35 @@ def asset_url(tag, name):
     return f"https://github.com/{REPO}/releases/download/{tag}/{name}"
 
 
+MAC_START = '<!-- MAC-NATIVE:START'
+MAC_END   = '<!-- MAC-NATIVE:END -->'
+
+
+def replace_version_outside_mac_block(html, old_ver, new_ver):
+    """Rewrite the version everywhere EXCEPT the native Mac block.
+
+    The digit guards below stop "2.0.1" corrupting "2.0.11". They do NOT stop
+    this app's version corrupting the MAC app's, because the two lines can
+    legitimately share a prefix: with this app on 4.0.0 and the Mac app on
+    4.0.0-alpha.1, a blanket replace of "4.0.0" turns the Mac string into
+    "4.0.1-alpha.1" — a version that never existed, linking a download that
+    does not, on a page that still looks right.
+
+    So the Mac block is cut out, the replacement runs on the rest, and it is
+    put back. The markers are in index.html and are the contract; a page
+    missing them is handled as it always was, with a warning rather than a
+    failure, because an older index.html is still a valid one.
+    """
+    if MAC_START not in html or MAC_END not in html:
+        print('NOTE: no MAC-NATIVE block found — rewriting the whole page')
+        return re.sub(r'(?<!\d)' + re.escape(old_ver) + r'(?!\d)', new_ver, html)
+
+    head, rest = html.split(MAC_START, 1)
+    mac, tail = rest.split(MAC_END, 1)
+    sub = lambda t: re.sub(r'(?<!\d)' + re.escape(old_ver) + r'(?!\d)', new_ver, t)
+    return sub(head) + MAC_START + mac + MAC_END + sub(tail)
+
+
 # ── Main ───────────────────────────────────────────────────────────────────
 
 if len(sys.argv) < 2:
@@ -45,9 +74,22 @@ new_ver = new_tag.lstrip('v')   # e.g. "2.0.2"
 with open('index.html') as f:
     html = f.read()
 
-m = re.search(r'releases/download/v([\w.\-]+)/', html)
+# ── WHICH VERSION, AND WHOSE ───────────────────────────────────────────────
+#
+# ANCHORED TO THIS REPO'S OWN URLS. It used to match the first
+# `releases/download/vX/` anywhere in the page, which was fine while every
+# download on the site came from khaytapp/Khayt. The site now also links the
+# NATIVE Mac app, whose releases live in KhaytApp/khayt-mac on their own
+# version line — 4.0.0-alpha.1 while this app is on 3.7.0.
+#
+# Unanchored, this would have read the Mac app's version as "the current
+# version", then rewritten the page around a number that has nothing to do with
+# the release being published.
+m = re.search(r'github\.com/khaytapp/Khayt/releases/download/v([\w.\-]+)/', html, re.I)
 if not m:
     print('ERROR: could not detect current version in index.html')
+    print('       (looked for a khaytapp/Khayt download URL — the Mac app\'s own')
+    print('        links live in KhaytApp/khayt-mac and are deliberately ignored)')
     sys.exit(1)
 
 old_ver = m.group(1)
@@ -107,11 +149,11 @@ if release:
 
     # Now replace version in non-URL text (version badges, JSON-LD, etc.).
     # Use digit boundary guards so e.g. "2.0.1" won't corrupt "2.0.11" in newer URLs.
-    html = re.sub(r'(?<!\d)' + re.escape(old_ver) + r'(?!\d)', new_ver, html)
+    html = replace_version_outside_mac_block(html, old_ver, new_ver)
 
 else:
     # Fallback: plain string replace (may break if filename format changed)
-    html = re.sub(r'(?<!\d)' + re.escape(old_ver) + r'(?!\d)', new_ver, html)
+    html = replace_version_outside_mac_block(html, old_ver, new_ver)
 
 with open('index.html', 'w') as f:
     f.write(html)

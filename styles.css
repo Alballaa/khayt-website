@@ -559,3 +559,35 @@ body[dir="rtl"] .dl-link:hover .arr { transform: translateX(-3px); }
 .cmp thead th.cmp-feat, .cmp td.cmp-feat { text-align: start; }
 
 @media (max-width: 600px) { .cmp { font-size: 13.5px; } .cmp-chip { font-size: 12px; padding: 5px 11px; } }
+
+/* ── The native Mac app ────────────────────────────────────────────────────
+   Its own surface rather than a fourth download card, because it is not a
+   fourth platform — it is a different build of the same product, on its own
+   version line, at a different stage of readiness. A card in the row above
+   would have said "pick one of four", which is the one thing a shop must not
+   read here while this is an alpha. */
+.mac-native {
+  margin-top: 26px; padding: 26px 28px; text-align: start;
+  background: var(--paper-2); border: 1px solid var(--line);
+  border-radius: 16px;
+}
+.mn-head { display: flex; align-items: center; gap: 11px; flex-wrap: wrap; }
+/* The badge earns its colour: this is the one place on the page where a
+   reader needs to notice a caveat before they notice the download. */
+.mn-badge {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase;
+  padding: 4px 9px; border-radius: 999px;
+  background: var(--ink); color: #fff;
+}
+.mn-h { font-family: var(--font-display); font-weight: 800; font-size: 21px; margin: 0; }
+.mn-p { margin: 13px 0 0; color: var(--ink-soft); font-size: 15px; line-height: 1.62; max-width: 70ch; }
+.mn-warn { color: var(--ink); font-weight: 500; }
+.mn-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 18px; }
+.mn-dl { background: #fff; min-width: 280px; }
+.mn-notes { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.mn-road { margin: 16px 0 0; color: var(--muted); font-size: 13.5px; line-height: 1.6; max-width: 70ch; }
+@media (max-width: 640px) {
+  .mac-native { padding: 20px 18px; }
+  .mn-dl { min-width: 0; width: 100%; }
+}
