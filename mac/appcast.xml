@@ -5,16 +5,16 @@
     <description>Updates for the native Khayt Mac app.</description>
     <language>en</language>
     <item>
-      <title>4.0.0-alpha.1</title>
-      <pubDate>Fri, 11 Sep 2026 10:30:41 GMT</pubDate>
-      <sparkle:version>1</sparkle:version>
-      <sparkle:shortVersionString>4.0.0-alpha.1</sparkle:shortVersionString>
+      <title>4.0.0-alpha.2</title>
+      <pubDate>Fri, 11 Sep 2026 11:26:04 GMT</pubDate>
+      <sparkle:version>2</sparkle:version>
+      <sparkle:shortVersionString>4.0.0-alpha.2</sparkle:shortVersionString>
       <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
-      <sparkle:releaseNotesLink>https://github.com/KhaytApp/khayt-mac/releases/tag/v4.0.0-alpha.1</sparkle:releaseNotesLink>
-      <enclosure url="https://github.com/KhaytApp/khayt-mac/releases/download/v4.0.0-alpha.1/Khayt-4.0.0-alpha.1.zip"
-                 length="7030975"
+      <sparkle:releaseNotesLink>https://github.com/KhaytApp/khayt-mac/releases/tag/v4.0.0-alpha.2</sparkle:releaseNotesLink>
+      <enclosure url="https://github.com/KhaytApp/khayt-mac/releases/download/v4.0.0-alpha.2/Khayt-4.0.0-alpha.2.zip"
+                 length="7031159"
                  type="application/octet-stream"
-                 sparkle:edSignature="6OdgGF5eAEmnobuNXyvjLppyyHdyj63QDaTXHz1ejEDwTmA3PulKiPb7pJYa/YnJaJbZKpDKBCI5ZQLrMmpcBg==" />
+                 sparkle:edSignature="lN3mQZIBm3JGR8ubL55X9XxB7Yncqv1njUkCHDSFNKbmFQExkP+BwOQGwK36qLsNGyBC0Ef5KZwO629rn8fYBA==" />
     </item>
   </channel>
 </rss>
